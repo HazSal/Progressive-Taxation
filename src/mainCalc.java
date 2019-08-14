@@ -9,7 +9,7 @@ public class mainCalc {
 	static String line;
 	static double[] taxRate= new double[4];
 	static int[] incCap= new int[4];
-	
+	//Reads and extracts tax bracket info from text file
 	public static void getTaxBrackets() {
 		try {
 			FileReader fileReader=new FileReader(taxBrackets);
@@ -17,6 +17,7 @@ public class mainCalc {
 			int i=0;
 			
 			while((line=bufferedReader.readLine())!=null) {
+				//Tax rate and income cap is split with a space and stored in separate array variables
 				String[] keypair=line.split(" ");
 				taxRate[i] = Double.parseDouble(keypair[0]);
 				incCap[i] = Integer.parseInt(keypair[1]);
@@ -32,7 +33,7 @@ public class mainCalc {
 		}	
 	}
 	
-	
+	//Calculation of income tax
 	public static void main(String[] args) {
 		int income;
 		int taxable = 0;
@@ -40,6 +41,7 @@ public class mainCalc {
 		getTaxBrackets();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter an income amount.");
+		//checks if income tax is int.
 		while (true)
             try {
             	income = Integer.parseInt(sc.nextLine());
@@ -47,7 +49,7 @@ public class mainCalc {
             } catch (NumberFormatException nfe) {
                 System.out.print("The entered income amount is invalid. Please try again: ");
             }
-	
+	//income tax calculations done in a series of if statements
 		for (int i = 0;i<=taxRate.length-1;i++){
 			if((i==0)){
 				if(income<=incCap[i]){
